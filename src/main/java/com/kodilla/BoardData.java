@@ -22,7 +22,7 @@ public class BoardData {
                 break;
             }
 
-//a
+//something new happend here
             if (playerOneTurn) {
                 playerOneMove(scanner);
                 playerOneTurn = false;
