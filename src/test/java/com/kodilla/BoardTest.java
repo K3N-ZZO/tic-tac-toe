@@ -186,7 +186,7 @@ public class BoardTest {
 
         // Przekroczenie zakresu planszy
         Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
-            board.makeMove(3, 3, 'X');
+            board.makeMove(4, 4, 'X'); // Tutaj zmieniamy na (4, 4), co jest poza zakresem dla planszy 3x3
         });
         assertEquals("Nieprawidłowy ruch", exception.getMessage());
 

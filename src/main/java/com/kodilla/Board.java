@@ -27,13 +27,14 @@ public class Board {
     }
 
     public boolean makeMove(int row, int col, char player) {
-        if (row >= 0 && row < size && col >= 0 && col < size && board[row][col] == ' ') {
-            board[row][col] = player;
-            return true;
-        } else {
-            System.out.println("Ruch (" + (row + 1) + ", " + (col + 1) + ") jest nieprawidłowy. Spróbuj ponownie.");
-            return false;
+        if (row >= size || col >= size || row < 0 || col < 0) {
+            throw new IndexOutOfBoundsException("Nieprawidłowy ruch");
         }
+        if (board[row][col] != '\0') {
+            throw new IllegalArgumentException("Pole już zajęte");
+        }
+        board[row][col] = player;
+        return true;
     }
 
     public boolean isFull() {
