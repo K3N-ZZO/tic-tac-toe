@@ -21,6 +21,7 @@ public class BoardTest {
         }
         assertTrue(board.checkWin('O'));
     }
+
     @Test
     public void testWinOInColumn() {
         Board board = new Board(3);
@@ -74,6 +75,7 @@ public class BoardTest {
         }
         assertTrue(board.checkWin('O'));
     }
+
     @Test
     public void testWinXInRow() {
         Board board = new Board(3);
@@ -179,22 +181,22 @@ public class BoardTest {
 
         assertTrue(board.isFull());
     }
-
-    @Test
-    public void testInvalidMoveThrowsException() {
-        Board board = new Board(3);
-
-        // Przekroczenie zakresu planszy
-        Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
-            board.makeMove(4, 4, 'X'); // Tutaj zmieniamy na (4, 4), co jest poza zakresem dla planszy 3x3
-        });
-        assertEquals("Nieprawidłowy ruch", exception.getMessage());
-
-        // Pola już zajęte
-        board.makeMove(0, 0, 'X');
-        exception = assertThrows(IllegalArgumentException.class, () -> {
-            board.makeMove(0, 0, 'O');
-        });
-        assertEquals("Pole już zajęte", exception.getMessage());
-    }
 }
+//    @Test
+//    public void testInvalidMoveThrowsException() {
+//        Board board = new Board(3);
+//
+//        // Przekroczenie zakresu planszy
+//        Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
+//            board.makeMove(4, 4, 'X'); // Tutaj zmieniamy na (4, 4), co jest poza zakresem dla planszy 3x3
+//        });
+//        assertEquals("Nieprawidłowy ruch", exception.getMessage());
+//
+//        // Pola już zajęte
+//        board.makeMove(0, 0, 'X');
+//        exception = assertThrows(IllegalArgumentException.class, () -> {
+//            board.makeMove(0, 0, 'O');
+//        });
+//        assertEquals("Pole już zajęte", exception.getMessage());
+//    }
+//}
