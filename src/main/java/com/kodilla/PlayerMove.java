@@ -2,34 +2,37 @@ package com.kodilla;
 
 import java.util.Scanner;
 
-import static com.kodilla.BoardData.isSpaceAvailable;
-import static com.kodilla.BoardData.placeMark;
-
 public class PlayerMove {
+    private static Board board;
 
-    public void playerOneMove(Scanner scanner) { //Stworzyc klase gracza
-        OutputDisplay.printXMove();
-        String input = scanner.nextLine();
-        int position = Integer.parseInt(input);
-        if (isSpaceAvailable(board, position) && position <= 9) {
-            placeMark(position, 'X');
-        } else {
-            OutputDisplay.invalidXMove();
-            board.printBoard();
+    public static void setBoard(Board board) {
+        PlayerMove.board = board;
+    }
+
+    public static void playerOneMove(Scanner scanner) {
+        System.out.print("Gracz X - wprowadź wiersz i kolumnę (dla planszy 3x3 od 1 do 3, dla planszy 10x10 od 1 do 10): ");
+        int row = scanner.nextInt();
+        int col = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Próbujesz wykonać ruch w wierszu: " + row + ", kolumnie: " + col);
+        row -= 1;
+        col -= 1;
+        if (!board.makeMove(row, col, 'X')) {
+            System.out.println("Nieprawidłowy ruch, spróbuj ponownie.");
             playerOneMove(scanner);
         }
     }
 
-
-    public void playerTwoMove(Scanner scanner) {
-        OutputDisplay.printOMove();
-        String input = scanner.nextLine();
-        int position = Integer.parseInt(input);
-        if (isSpaceAvailable(board, position) && position <= 9) {
-            placeMark(position, 'O');
-        } else {
-            OutputDisplay.invalidOMove();
-            BoardData.board.printBoard();
+    public static void playerTwoMove(Scanner scanner) {
+        System.out.print("Gracz O - wprowadź wiersz i kolumnę (dla planszy 3x3 od 1 do 3, dla planszy 10x10 od 1 do 10): ");
+        int row = scanner.nextInt();
+        int col = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Próbujesz wykonać ruch w wierszu: " + row + ", kolumnie: " + col);
+        row -= 1;
+        col -= 1;
+        if (!board.makeMove(row, col, 'O')) {
+            System.out.println("Nieprawidłowy ruch, spróbuj ponownie.");
             playerTwoMove(scanner);
         }
     }

@@ -1,100 +1,72 @@
 package com.kodilla;
 
-import javax.print.attribute.standard.MediaSize;
 import java.util.Scanner;
 
-
 public class BoardData {
-    public static final Board board = mark;
+    private final Board board;
 
     public BoardData(Board board) {
         this.board = board;
     }
 
-    public void startGame() {
-        Scanner scanner = new Scanner(System.in);
-        boolean playerOneTurn = true;
+    public void startGame(boolean isPvP, Scanner scanner) {
+        char currentPlayer = 'X';
+        boolean gameWon = false;
 
+        ComputerMove.setBoard(board);
 
-        while (true) {
-            board.printBoard();
-            OutputDisplay.drawSpace();
+        while (!board.isFull() && !gameWon) {
+            System.out.println("Aktualna plansza:");
+            displayBoard();
 
-            if (checkIsGameOver(board)) {
-                break;
-            }
-
-            if (playerOneTurn) {
-                playerOneMove(scanner);
-                playerOneTurn = false;
+            if (isPvP || currentPlayer == 'X') {
+                if (currentPlayer == 'X') {
+                    PlayerMove.playerOneMove(scanner);
+                } else {
+                    PlayerMove.playerTwoMove(scanner);
+                }
             } else {
-                playerTwoMove(scanner);
-                playerOneTurn = true;
+                ComputerMove.makeMove();
             }
 
+            gameWon = board.checkWin(currentPlayer);
+            if (!gameWon) {
+                currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+            }
+        }
+
+        System.out.println("Koniec gry!");
+        displayBoard();
+        if (gameWon) {
+            System.out.println("Gracz " + currentPlayer + " wygrał!");
+        } else {
+            System.out.println("Remis!");
         }
     }
 
-    private static boolean checkIsGameOver(Board board) { //zmienic nazwe
-
+    private void displayBoard() {
+        int size = board.getSize();
         char[][] boardArray = board.getBoard();
 
-        if (userWon(boardArray, 'X')) {
-            return true;
-        } else if (userWon(boardArray, 'O')){
-            return true;
-        }
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (board.getBoard()[i][j] == ' ') {
-                    return false;
+        for (int i = 0; i < size; i++) {
+            System.out.println();
+            for (int j = 0; j < size; j++) {
+                System.out.print(" " + boardArray[i][j]);
+                if (j < size - 1) {
+                    System.out.print(" |");
                 }
             }
+            System.out.println();
+            if (i < size - 1) {
+                for (int j = 0; j < size; j++) {
+                    System.out.print("---");
+                    if (j < size - 1) {
+                        System.out.print("+");
+                    }
+                }
+                System.out.println();
+            }
         }
-        OutputDisplay.printTie();
-        return true;
+        System.out.println();
     }
-
-    private static boolean userWon(char[][] boardArray, char symbol) {
-        if ((boardArray[0][0] == symbol && boardArray[0][1] == symbol && boardArray[0][2] == symbol) ||
-                (boardArray[1][0] == symbol && boardArray[1][1] == symbol && boardArray[1][2] == symbol) ||
-                (boardArray[2][0] == symbol && boardArray[2][1] == symbol && boardArray[2][2] == symbol) ||
-
-                (boardArray[0][0] == symbol && boardArray[1][0] == symbol && boardArray[2][0] == symbol) ||
-                (boardArray[0][1] == symbol && boardArray[1][1] == symbol && boardArray[2][1] == symbol) ||
-                (boardArray[0][2] == symbol && boardArray[1][2] == symbol && boardArray[2][2] == symbol) ||
-
-                (boardArray[0][0] == symbol && boardArray[1][1] == symbol && boardArray[2][2] == symbol) ||
-                (boardArray[0][2] == symbol && boardArray[1][1] == symbol && boardArray[2][0] == symbol)) {
-            System.out.println("Player " + symbol + " won!");
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isSpaceAvailable(Board board, int position) {
-
-        if (position < 1 || position > 9) {
-            return false;
-        }
-        int row = (position - 1) / 3;
-        int col = (position - 1) % 3;
-        OutputDisplay.invalidPos();
-        return board.getBoard()[row][col] == ' ';
-    }
-
-    public static void placeMark(int position, char mark) {
-        if (position < 1 || position > 9) {
-
-            return;
-        }
-
-        int row = (position - 1) / 3;
-        int col = (position - 1) % 3;
-        board.getBoard()[row][col] = mark;
-    }
-
-
-
 }
