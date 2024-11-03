@@ -10,32 +10,38 @@ public class PlayerMove {
     }
 
     public static void playerOneMove(Scanner scanner) {
-        System.out.print("Gracz X - wprowadź wiersz i kolumnę (dla planszy 3x3 od 1 do 3, dla planszy 10x10 od 1 do 10): ");
-        int row = scanner.nextInt();
-        int col = scanner.nextInt();
-        scanner.nextLine();  // Consumes the newline
-        System.out.println("Próbujesz wykonać ruch w wierszu: " + row + ", kolumnie: " + col);
-        row -= 1;
-        col -= 1;
+        boolean validMove = false;
+        while (!validMove) {
+            System.out.print("Gracz X - wprowadź wiersz i kolumnę (1-3 dla planszy 3x3, 1-10 dla planszy 10x10): ");
+            int row = scanner.nextInt() - 1;
+            int col = scanner.nextInt() - 1;
+            scanner.nextLine();
 
-        if (!board.makeMove(row, col, 'X')) {
-            System.out.println("Nieprawidłowy ruch, spróbuj ponownie.");
-            playerOneMove(scanner);
+            try {
+                validMove = board.makeMove(row, col, 'X');
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Nieprawidłowy ruch: przekroczenie zakresu planszy. Spróbuj ponownie.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Nieprawidłowy ruch: pole już zajęte. Spróbuj ponownie.");
+            }
         }
     }
 
     public static void playerTwoMove(Scanner scanner) {
-        System.out.print("Gracz O - wprowadź wiersz i kolumnę (dla planszy 3x3 od 1 do 3, dla planszy 10x10 od 1 do 10): ");
-        int row = scanner.nextInt();
-        int col = scanner.nextInt();
-        scanner.nextLine();  // Consumes the newline
-        System.out.println("Próbujesz wykonać ruch w wierszu: " + row + ", kolumnie: " + col);
-        row -= 1;
-        col -= 1;
+        boolean validMove = false;
+        while (!validMove) {
+            System.out.print("Gracz O - wprowadź wiersz i kolumnę (1-3 dla planszy 3x3, 1-10 dla planszy 10x10): ");
+            int row = scanner.nextInt() - 1;
+            int col = scanner.nextInt() - 1;
+            scanner.nextLine();
 
-        if (!board.makeMove(row, col, 'O')) {
-            System.out.println("Nieprawidłowy ruch, spróbuj ponownie.");
-            playerTwoMove(scanner);
+            try {
+                validMove = board.makeMove(row, col, 'O');
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Nieprawidłowy ruch: przekroczenie zakresu planszy. Spróbuj ponownie.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Nieprawidłowy ruch: pole już zajęte. Spróbuj ponownie.");
+            }
         }
     }
 }

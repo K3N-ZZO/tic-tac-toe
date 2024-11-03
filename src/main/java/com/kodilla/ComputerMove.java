@@ -11,13 +11,20 @@ public class ComputerMove {
 
     public static void makeMove() {
         Random random = new Random();
-        int row, col;
+        boolean validMove = false;
+        int row = 0, col = 0;
 
-        do {
+        while (!validMove) {
             row = random.nextInt(board.getSize());
             col = random.nextInt(board.getSize());
-        } while (!board.makeMove(row, col, 'O'));
-
-        System.out.println("Komputer wykonał ruch na pozycji: " + (row + 1) + ", " + (col + 1));
+            try {
+                validMove = board.makeMove(row, col, 'O');
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Komputer wykonał nieprawidłowy ruch: przekroczenie zakresu planszy.");
+            } catch (IllegalArgumentException e) {
+                System.out.println("Komputer wykonał nieprawidłowy ruch: pole już zajęte. Próbuje ponownie.");
+            }
+        }
+        System.out.println("Komputer wykonał ruch na pozycji: " + (row + 1) + "," + (col + 1));
     }
 }

@@ -19,6 +19,7 @@ public class BoardData {
             System.out.println("Aktualna plansza:");
             displayBoard();
 
+
             if (isPvP || currentPlayer == 'X') {
                 if (currentPlayer == 'X') {
                     PlayerMove.playerOneMove(scanner);

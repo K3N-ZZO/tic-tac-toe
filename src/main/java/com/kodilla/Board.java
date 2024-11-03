@@ -27,13 +27,14 @@ public class Board {
     }
 
     public boolean makeMove(int row, int col, char player) {
-        if (row >= 0 && row < size && col >= 0 && col < size && board[row][col] == ' ') {
-            board[row][col] = player;
-            return true;
-        } else {
-            System.out.println("Ruch (" + (row + 1) + ", " + (col + 1) + ") jest nieprawidłowy. Spróbuj ponownie.");
-            return false;
+        if (row < 0 || row >= size || col < 0 || col >= size) {
+            throw new IndexOutOfBoundsException("Nieprawidłowy ruch");
         }
+        if (board[row][col] != ' ') {
+            throw new IllegalArgumentException("Pole już zajęte");
+        }
+        board[row][col] = player;
+        return true;
     }
 
     public boolean isFull() {
@@ -50,14 +51,14 @@ public class Board {
     public boolean checkWin(char player) {
         int winCondition = (size == 3) ? 3 : 5;
 
-
+        // Check rows
         for (int row = 0; row < size; row++) {
             if (checkLine(player, winCondition, board[row])) {
                 return true;
             }
         }
 
-
+        // Check columns
         for (int col = 0; col < size; col++) {
             char[] column = new char[size];
             for (int row = 0; row < size; row++) {
