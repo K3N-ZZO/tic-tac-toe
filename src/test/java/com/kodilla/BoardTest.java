@@ -149,17 +149,17 @@ public class BoardTest {
     @Test
     public void testDraw() {
         Board board = new Board(3);
-        // XOX
+
         board.makeMove(0, 0, 'X');
         board.makeMove(0, 1, 'O');
         board.makeMove(0, 2, 'X');
 
-        // OXO
+
         board.makeMove(1, 0, 'O');
         board.makeMove(1, 1, 'X');
         board.makeMove(1, 2, 'O');
 
-        // XOX
+
         board.makeMove(2, 0, 'X');
         board.makeMove(2, 1, 'O');
         board.makeMove(2, 2, 'X');
@@ -170,7 +170,6 @@ public class BoardTest {
     @Test
     public void testDraw10x10() {
         Board board = new Board(10);
-        // Naprzemienny wzorzec X i O
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 board.makeMove(i, j, (i + j) % 2 == 0 ? 'X' : 'O');
@@ -184,13 +183,12 @@ public class BoardTest {
     public void testInvalidMoveThrowsException() {
         Board board = new Board(3);
 
-        // Przekroczenie zakresu planszy
         Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {
             board.makeMove(4, 4, 'X');
         });
         assertEquals("Nieprawidłowy ruch", exception.getMessage());
 
-        // Pola już zajęte
+
         board.makeMove(0, 0, 'X');
         exception = assertThrows(IllegalArgumentException.class, () -> {
             board.makeMove(0, 0, 'O');

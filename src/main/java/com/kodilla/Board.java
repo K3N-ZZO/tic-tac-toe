@@ -51,14 +51,14 @@ public class Board {
     public boolean checkWin(char player) {
         int winCondition = (size == 3) ? 3 : 5;
 
-        // Check rows
+
         for (int row = 0; row < size; row++) {
             if (checkLine(player, winCondition, board[row])) {
                 return true;
             }
         }
 
-        // Check columns
+
         for (int col = 0; col < size; col++) {
             char[] column = new char[size];
             for (int row = 0; row < size; row++) {
@@ -69,7 +69,7 @@ public class Board {
             }
         }
 
-        // Check diagonals and anti-diagonals
+
         if (checkDiagonals(player, winCondition)) {
             return true;
         }
@@ -95,7 +95,7 @@ public class Board {
     private boolean checkDiagonals(char player, int winCondition) {
         int count;
 
-        // Check main diagonals
+
         for (int start = 0; start <= size - winCondition; start++) {
             count = 0;
             for (int i = 0; i < size - start; i++) {
@@ -122,7 +122,7 @@ public class Board {
             }
         }
 
-        // Check anti-diagonals
+
         for (int start = 0; start <= size - winCondition; start++) {
             count = 0;
             for (int i = 0; i < size - start; i++) {

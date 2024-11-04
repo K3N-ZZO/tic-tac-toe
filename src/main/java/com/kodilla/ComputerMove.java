@@ -20,9 +20,9 @@ public class ComputerMove {
             try {
                 validMove = board.makeMove(row, col, 'O');
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Komputer wykonał nieprawidłowy ruch: przekroczenie zakresu planszy.");
+                OutputDisplay.outputComputerIndexOutOfBounds();
             } catch (IllegalArgumentException e) {
-                System.out.println("Komputer wykonał nieprawidłowy ruch: pole już zajęte. Próbuje ponownie.");
+                OutputDisplay.outputComputerAlreadyTaken();
             }
         }
         System.out.println("Komputer wykonał ruch na pozycji: " + (row + 1) + "," + (col + 1));

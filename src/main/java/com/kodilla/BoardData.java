@@ -16,7 +16,7 @@ public class BoardData {
         ComputerMove.setBoard(board);
 
         while (!board.isFull() && !gameWon) {
-            System.out.println("Aktualna plansza:");
+            OutputDisplay.outputActualBoard();
             displayBoard();
 
 
@@ -36,12 +36,12 @@ public class BoardData {
             }
         }
 
-        System.out.println("Koniec gry!");
+        OutputDisplay.outputEndGame();
         displayBoard();
         if (gameWon) {
             System.out.println("Gracz " + currentPlayer + " wygrał!");
         } else {
-            System.out.println("Remis!");
+            OutputDisplay.outputDraw();
         }
     }
 
