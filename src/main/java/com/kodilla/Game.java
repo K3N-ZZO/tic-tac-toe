@@ -5,8 +5,12 @@ import java.util.Scanner;
 public class Game {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Board board;
+        Board board = null;
         boolean isPvP = true;
+
+        int playerOneScore = 0;
+        int playerTwoScore = 0;
+        int computerScore = 0;
 
         try {
             while (true) {
@@ -37,13 +41,92 @@ public class Game {
             }
 
             BoardData boardData = new BoardData(board);
-            PlayerMove.setBoard(board);
-            boardData.startGame(isPvP, scanner);
+
+            boolean playAgain = true;
+            while (playAgain) {
+                board.clearBoard();
+                PlayerMove.setBoard(board);
+                ComputerMove.setBoard(board);
+
+                boolean gameOver = false;
+
+                while (!gameOver) {
+                    boardData.displayBoard();
+
+                    PlayerMove.playerOneMove(scanner);
+                    boardData.displayBoard();
+
+
+                    if (board.checkWin('X')) {
+                        playerOneScore++;
+                        OutputDisplay.outputPlayerXWon();
+                        gameOver = true;
+                    } else if (board.isFull()) {
+                        OutputDisplay.outputDraw();
+                        gameOver = true;
+                    }
+                    if (gameOver) {
+                        break;
+                    }
+
+                    if (isPvP) {
+                        PlayerMove.playerTwoMove(scanner);
+
+                    } else {
+                        ComputerMove.makeMove();
+
+                    }
+
+
+                    if (board.checkWin('O')) {
+                        if (isPvP) {
+                            playerTwoScore++;
+                            OutputDisplay.outputPlayerOWon();
+                        } else {
+                            computerScore++;
+                            OutputDisplay.outputComputerWon();
+                        }
+                        gameOver = true;
+                    } else if (board.isFull()) {
+                        gameOver = true;
+                        OutputDisplay.outputDraw();
+                    }
+
+                }
+
+
+                boardData.displayBoard();
+
+                playAgain = isPlayAgain(playerOneScore, isPvP, playerTwoScore, computerScore, scanner);
+            }
         } finally {
             scanner.close();
         }
     }
 
+    private static boolean isPlayAgain(int playerOneScore, boolean isPvP, int playerTwoScore, int computerScore, Scanner scanner) {
+        boolean playAgain;
+        System.out.println("Wynik:");
+        System.out.println("Gracz X: " + playerOneScore);
+        if (isPvP) {
+            System.out.println("Gracz O: " + playerTwoScore);
+        } else {
+            System.out.println("Komputer: " + computerScore);
+        }
+        while (true) {
+            OutputDisplay.outputPlayAgain();
+            String response = scanner.nextLine().trim().toLowerCase();
+            if (response.equals("tak")) {
+                return true;
+            } else if (response.equals("nie")) {
+                OutputDisplay.outputThanksForPlaying();
+                return false;
+            } else {
+                OutputDisplay.outputWrongChoice();
+            }
+        }
+
+    }
 
     private static Board chooseBoardSize(Scanner scanner) {
         while (true) {

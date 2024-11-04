@@ -1,34 +1,21 @@
 package com.kodilla;
 
 public class OutputDisplay {
-    public static void drawSpace() {
 
+    public static void outputPlayerXWon() {
+        System.out.println("Gracz X wygrał! ");
     }
 
-    public static void outputActualBoard() {
-        System.out.println("Aktualna plansza:");
-
+    public static void outputPlayerOWon() {
+        System.out.println("Gracz O wygrał! ");
     }
 
-    public static void outputEndGame() {
-        System.out.println("Koniec gry!");
-
+    public static void outputComputerWon() {
+        System.out.println("Komputer wygrał! ");
     }
 
     public static void outputDraw() {
         System.out.println("Remis!");
-    }
-
-    public static void outputComputerMove() {
-        System.out.println("Komputer wykonuje ruch.");
-    }
-
-    public static void outputPlayerMove() {
-        System.out.println("Gracz wykonuje ruch.");
-    }
-
-    public static void outputWinner() {
-
     }
 
     public static void outputWrongChoice() {
@@ -43,7 +30,7 @@ public class OutputDisplay {
         System.out.println("Wybierz opcję:");
         System.out.println("1. Gra (Plansza 3x3) - Gracz vs Gracz");
         System.out.println("2. Gra (Plansza 10x10) - Gracz vs Gracz");
-        System.out.println("3. Instrukcje obsługi");
+        System.out.println("3. Instrukcja obsługi");
         System.out.println("4. Gra z komputerem");
         System.out.print("Wprowadź numer opcji, aby kontynuować: ");
     }
@@ -97,5 +84,10 @@ public class OutputDisplay {
         System.out.println("Komputer wykonał nieprawidłowy ruch: pole już zajęte. Próbuje ponownie.");
     }
 
+    public static void outputPlayAgain() {
+        System.out.print("Czy chcesz zagrać ponownie? (tak/nie): ");
+    }
+    public static void outputThanksForPlaying(){
+        System.out.println("Dziękuję za grę! Do zobaczenia!");
+    }
 }
-

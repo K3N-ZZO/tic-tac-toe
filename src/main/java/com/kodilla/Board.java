@@ -36,7 +36,13 @@ public class Board {
         board[row][col] = player;
         return true;
     }
-
+    public void clearBoard() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                board[i][j] = ' ';
+            }
+        }
+    }
     public boolean isFull() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
