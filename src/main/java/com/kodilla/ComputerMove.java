@@ -4,13 +4,13 @@ import java.util.Random;
 
 public class ComputerMove {
     private static Board board;
+    static Random random = new Random();
 
     public static void setBoard(Board board) {
         ComputerMove.board = board;
     }
 
-    public static void makeMove() { //powinien otrzymac argument board
-        Random random = new Random();  // przesunac wyzej jako pole klasy
+    public static void makeMove(Board board) {
         boolean validMove = false;
         int row = 0, col = 0;
 
@@ -25,6 +25,6 @@ public class ComputerMove {
                 OutputDisplay.outputComputerAlreadyTaken();
             }
         }
-        System.out.println("Komputer wykonał ruch na pozycji: " + (row + 1) + "," + (col + 1));
+        OutputDisplay.outputComputerMove((row + 1),(col + 1));
     }
 }

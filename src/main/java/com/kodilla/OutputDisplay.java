@@ -1,6 +1,35 @@
 package com.kodilla;
 
+
 public class OutputDisplay {
+
+    static void displayBoard(Board board) {
+
+        int size = board.getSize();
+        char[][] boardArray = board.getBoard();
+
+        for (int i = 0; i < size; i++) {
+            System.out.println();
+            for (int j = 0; j < size; j++) {
+                System.out.print(" " + boardArray[i][j]);
+                if (j < size - 1) {
+                    System.out.print(" |");
+                }
+            }
+            System.out.println();
+            if (i < size - 1) {
+                for (int j = 0; j < size; j++) {
+                    System.out.print("---");
+                    if (j < size - 1) {
+                        System.out.print("+");
+                    }
+                }
+                System.out.println();
+            }
+        }
+        System.out.println();
+    }
+
 
     public static void outputPlayerXWon() {
         System.out.println("Gracz X wygrał! ");
@@ -32,6 +61,9 @@ public class OutputDisplay {
         System.out.println("2. Gra (Plansza 10x10) - Gracz vs Gracz");
         System.out.println("3. Instrukcja obsługi");
         System.out.println("4. Gra z komputerem");
+        System.out.println("5. Usuń zapis");
+        System.out.println("6. Wczytaj zapisaną gre");
+        System.out.println("0. Wyjdź z gry");
         System.out.print("Wprowadź numer opcji, aby kontynuować: ");
     }
 
@@ -68,6 +100,10 @@ public class OutputDisplay {
         System.out.print("Gracz O - wprowadź wiersz i kolumnę (1-3 dla planszy 3x3, 1-10 dla planszy 10x10): ");
     }
 
+    public static void outputComputerMove(int row, int col){
+        System.out.println("Komputer wykonał ruch na pozycji: " + row + "," + col);
+    }
+
     public static void outputIndexOutOfBounds() {
         System.out.println("Nieprawidłowy ruch: przekroczenie zakresu planszy. Spróbuj ponownie.");
     }
@@ -88,7 +124,34 @@ public class OutputDisplay {
         System.out.print("Czy chcesz zagrać ponownie? (tak/nie): ");
     }
 
+    public static void outputGameSaved() {
+        System.out.println("Gra została zapisana.");
+    }
+
+    public static void outputGameSaveFailed() {
+        System.out.println("Nie udało się zapisać gry.");
+    }
+
+    public static void outputLoadGame() {
+        System.out.println("Czy chcesz wczytać zapisaną grę? (tak/nie)");
+    }
+
+    public static void outputLoadGameFailed() {
+        System.out.println("Nie udało się wczytać zapisanej gry.");
+    }
+
     public static void outputThanksForPlaying() {
         System.out.println("Dziękuję za grę! Do zobaczenia!");
+    }
+     public static void outputSaveFileDeleted() {
+        System.out.println("Zapis gry został usunięty.");
+    }
+
+    public static void outputSaveFileDeleteFailed() {
+        System.out.println("Nie udało się usunąć zapisu gry.");
+    }
+
+    public static void outputSaveFileNotFound() {
+            System.out.println("Zapis gry nie został znaleziony.");
     }
 }

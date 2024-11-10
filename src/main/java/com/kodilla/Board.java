@@ -1,6 +1,9 @@
 package com.kodilla;
 
-public class Board {
+import java.io.Serializable;
+
+public class Board implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final int size;
     private final char[][] board;
 
@@ -18,13 +21,6 @@ public class Board {
         }
     }
 
-    public int getSize() {
-        return size;
-    } //gettery na sam dół
-
-    public char[][] getBoard() {
-        return board;
-    }
 
     public boolean makeMove(int row, int col, char player) {
         if (row < 0 || row >= size || col < 0 || col >= size) {
@@ -151,5 +147,12 @@ public class Board {
         }
 
         return false;
+    }
+    public int getSize() {
+        return size;
+    }
+
+    public char[][] getBoard() {
+        return board;
     }
 }

@@ -3,19 +3,19 @@ package com.kodilla;
 import java.util.Scanner;
 
 public class PlayerMove {
-    private static Board board;
+    static Board board;
+    static Scanner scanner = new Scanner(System.in);
 
     public static void setBoard(Board board) {
         PlayerMove.board = board;
     }
 
-    public static void playerOneMove(Scanner scanner) {
+    public static void playerOneMove() {
         boolean validMove = false;
         while (!validMove) {
-            OutputDisplay.outputPlayerXMove();
-            int row = scanner.nextInt() - 1;
-            int col = scanner.nextInt() - 1;
-            scanner.nextLine();
+            int[] move = InputHandler.getPlayerMove('X');
+            int row = move[0];
+            int col = move[1];
 
             try {
                 validMove = board.makeMove(row, col, 'X');
@@ -27,13 +27,13 @@ public class PlayerMove {
         }
     }
 
-    public static void playerTwoMove(Scanner scanner) {
+    public static void playerTwoMove() {
         boolean validMove = false;
         while (!validMove) {
-            OutputDisplay.outputPlayerOMove();
-            int row = scanner.nextInt() - 1;
-            int col = scanner.nextInt() - 1;
-            scanner.nextLine();
+            int[] move = InputHandler.getPlayerMove('O');
+            int row = move[0];
+            int col = move[1];
+
 
             try {
                 validMove = board.makeMove(row, col, 'O');
