@@ -9,8 +9,8 @@ public class ComputerMove {
         ComputerMove.board = board;
     }
 
-    public static void makeMove() {
-        Random random = new Random();
+    public static void makeMove() { //powinien otrzymac argument board
+        Random random = new Random();  // przesunac wyzej jako pole klasy
         boolean validMove = false;
         int row = 0, col = 0;
 

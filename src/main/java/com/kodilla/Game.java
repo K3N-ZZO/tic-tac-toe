@@ -1,18 +1,16 @@
 package com.kodilla;
-
+//Dorobic zapis do pliku i odczytywanie
 import java.util.Scanner;
 
 public class Game {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Board board = null;
-        boolean isPvP = true;
 
-        int playerOneScore = 0;
-        int playerTwoScore = 0;
-        int computerScore = 0;
-
-        try {
+        try (Scanner scanner = new Scanner(System.in)) {
+            Board board;
+            boolean isPvP = true;
+            int playerOneScore = 0;
+            int playerTwoScore = 0;
+            int computerScore = 0;
             while (true) {
                 OutputDisplay.displayInstructions();
                 OutputDisplay.outputYourChoice();
@@ -33,11 +31,6 @@ public class Game {
                 } else {
                     OutputDisplay.outputWrongChoice();
                 }
-            }
-
-            if (board == null) {
-                OutputDisplay.outputDidntChoose();
-                return;
             }
 
             BoardData boardData = new BoardData(board);
@@ -99,13 +92,10 @@ public class Game {
 
                 playAgain = isPlayAgain(playerOneScore, isPvP, playerTwoScore, computerScore, scanner);
             }
-        } finally {
-            scanner.close();
         }
     }
 
     private static boolean isPlayAgain(int playerOneScore, boolean isPvP, int playerTwoScore, int computerScore, Scanner scanner) {
-        boolean playAgain;
         System.out.println("Wynik:");
         System.out.println("Gracz X: " + playerOneScore);
         if (isPvP) {

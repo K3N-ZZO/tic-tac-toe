@@ -20,7 +20,7 @@ public class Board {
 
     public int getSize() {
         return size;
-    }
+    } //gettery na sam dół
 
     public char[][] getBoard() {
         return board;
@@ -36,6 +36,7 @@ public class Board {
         board[row][col] = player;
         return true;
     }
+
     public void clearBoard() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -43,6 +44,7 @@ public class Board {
             }
         }
     }
+
     public boolean isFull() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -74,13 +76,7 @@ public class Board {
                 return true;
             }
         }
-
-
-        if (checkDiagonals(player, winCondition)) {
-            return true;
-        }
-
-        return false;
+        return checkDiagonals(player, winCondition);
     }
 
     private boolean checkLine(char player, int winCondition, char[] line) {
@@ -100,7 +96,6 @@ public class Board {
 
     private boolean checkDiagonals(char player, int winCondition) {
         int count;
-
 
         for (int start = 0; start <= size - winCondition; start++) {
             count = 0;

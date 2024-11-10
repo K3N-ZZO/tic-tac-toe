@@ -180,7 +180,7 @@ public class BoardTest {
     }
 
     @Test
-    public void testInvalidMoveThrowsException() {
+    public void testInvalidMoveThrowsException() { //pobierania i wyświetlania danych nie testuje
         Board board = new Board(3);
 
         Exception exception = assertThrows(IndexOutOfBoundsException.class, () -> {

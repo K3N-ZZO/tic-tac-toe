@@ -7,7 +7,7 @@ public class BoardData {
         this.board = board;
     }
 
-    void displayBoard() {
+    void displayBoard() { //przeniesc to do outputdisplay usunac ta klase przekazac board jako argument
         int size = board.getSize();
         char[][] boardArray = board.getBoard();
 

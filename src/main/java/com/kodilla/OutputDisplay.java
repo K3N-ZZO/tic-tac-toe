@@ -87,7 +87,8 @@ public class OutputDisplay {
     public static void outputPlayAgain() {
         System.out.print("Czy chcesz zagrać ponownie? (tak/nie): ");
     }
-    public static void outputThanksForPlaying(){
+
+    public static void outputThanksForPlaying() {
         System.out.println("Dziękuję za grę! Do zobaczenia!");
     }
 }
