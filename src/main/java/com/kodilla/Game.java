@@ -22,7 +22,7 @@ public class Game {
                     if ("0".equals(choice)) {
                         exit = true;
                         OutputDisplay.outputThanksForPlaying();
-                        break; // Wyjście z programu
+                        break;
                     } else if ("1".equals(choice)) {
                         board = new Board(3);
                         break;
@@ -131,7 +131,7 @@ public class Game {
             if (response.equals("tak")) {
                 return true;
             } else if (response.equals("nie")) {
-                return false; // Powrót do menu głównego
+                return false;
             } else {
                 OutputDisplay.outputWrongChoice();
             }
