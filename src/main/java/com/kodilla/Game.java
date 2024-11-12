@@ -14,43 +14,51 @@ public class Game {
             boolean exit = false;
 
             while (!exit) {
-                while (true) {
+                boolean validChoice = false;
+                label:
+                while (!validChoice) {
                     OutputDisplay.displayInstructions();
                     OutputDisplay.outputYourChoice();
                     String choice = scanner.nextLine();
 
-                    if ("0".equals(choice)) {
-                        exit = true;
-                        OutputDisplay.outputThanksForPlaying();
-                        break;
-                    } else if ("1".equals(choice)) {
-                        board = new Board(3);
-                        break;
-                    } else if ("2".equals(choice)) {
-                        board = new Board(10);
-                        break;
-                    } else if ("3".equals(choice)) {
-                        OutputDisplay.displayHowToPlay();
-                    } else if ("4".equals(choice)) {
-                        board = chooseBoardSize(scanner);
-                        isPvP = false;
-                        break;
-                    } else if ("5".equals(choice)) {
-                        deleteSaveFile();
-                    } else if ("6".equals(choice)) {
-                        GameState loadedState = loadGame();
-                        if (loadedState != null) {
-                            board = loadedState.getBoard();
-                            isPvP = loadedState.isPvP();
-                            playerOneScore = loadedState.getPlayerOneScore();
-                            playerTwoScore = loadedState.getPlayerTwoScore();
-                            computerScore = loadedState.getComputerScore();
+                    switch (choice) {
+                        case "0":
+                            exit = true;
+                            OutputDisplay.outputThanksForPlaying();
+                            break label;
+                        case "1":
+                            board = new Board(3);
+                            break label;
+                        case "2":
+                            board = new Board(10);
+                            break label;
+                        case "3":
+                            OutputDisplay.displayHowToPlay();
                             break;
-                        } else {
-                            OutputDisplay.outputLoadGameFailed();
-                        }
-                    } else {
-                        OutputDisplay.outputWrongChoice();
+                        case "4":
+                            board = chooseBoardSize(scanner);
+                            isPvP = false;
+                            break label;
+                        case "5":
+                            deleteSaveFile();
+                            break;
+                        case "6":
+                            GameState loadedState = loadGame();
+                            if (loadedState != null) {
+                                board = loadedState.getBoard();
+                                isPvP = loadedState.isPvP();
+                                playerOneScore = loadedState.getPlayerOneScore();
+                                playerTwoScore = loadedState.getPlayerTwoScore();
+                                computerScore = loadedState.getComputerScore();
+                                break label;
+                            } else {
+                                OutputDisplay.outputLoadGameFailed();
+                            }
+                            break;
+                        case null:
+                        default:
+                            OutputDisplay.outputWrongChoice();
+                            break;
                     }
                 }
 
@@ -125,7 +133,8 @@ public class Game {
         } else {
             System.out.println("Komputer: " + computerScore);
         }
-        while (true) {
+        boolean validResponse = false;
+        while (!validResponse) {
             OutputDisplay.outputPlayAgain();
             String response = scanner.nextLine().trim().toLowerCase();
             if (response.equals("tak")) {
@@ -136,10 +145,12 @@ public class Game {
                 OutputDisplay.outputWrongChoice();
             }
         }
+        return false;
     }
 
     private static Board chooseBoardSize(Scanner scanner) {
-        while (true) {
+        boolean validChoice = false;
+        while (!validChoice) {
             OutputDisplay.outputBoardSize();
             String choice = scanner.nextLine();
             if ("1".equals(choice)) {
@@ -150,6 +161,7 @@ public class Game {
                 OutputDisplay.outputWrongChoice();
             }
         }
+        return new Board(3);
     }
 
     private static void saveGame(GameState gameState) {
