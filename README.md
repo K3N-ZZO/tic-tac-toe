@@ -80,5 +80,5 @@ Additional Notes
 Serialization: The game state is serialized to allow saving and loading.
 Delete Save File: Use option 5 in the main menu to delete the saved game if needed.
 
-3. License
+## License
 This project is open-source and available under the MIT License.
