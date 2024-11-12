@@ -1,4 +1,4 @@
-# Game Project
+# Tic Tac Toe Game Project
 
 This project is a console-based game that allows two players to compete in a classic "X and O" game. It includes both a Player vs. Player (PvP) and Player vs. Computer (PvC) mode, with options to save and load the game state, as well as delete saved games.
 
